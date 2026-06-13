@@ -1,0 +1,130 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "disco": "https://developer.csdisco.com/vocab#",
+
+    "DiscoAPI": "disco:DiscoAPI",
+    "Dataset": "disco:Dataset",
+    "Metric": "disco:Metric",
+    "Metadata": "disco:Metadata",
+    "Organization": "schema:Organization",
+    "DataUsageChange": "disco:DataUsageChange",
+    "ReviewDatabaseSize": "disco:ReviewDatabaseSize",
+
+    "aid": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "baseURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "humanURL": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+    "organizationId": {
+      "@id": "disco:organizationId",
+      "@type": "xsd:string"
+    },
+    "apiKey": {
+      "@id": "disco:apiKey",
+      "@type": "xsd:string"
+    },
+    "rateLimit": {
+      "@id": "disco:rateLimit",
+      "@type": "xsd:integer"
+    },
+    "rateLimitWindow": {
+      "@id": "disco:rateLimitWindow",
+      "@type": "xsd:string"
+    },
+    "datasetId": {
+      "@id": "disco:datasetId",
+      "@type": "xsd:string"
+    },
+    "metricId": {
+      "@id": "disco:metricId",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "disco:eventType",
+      "@type": "xsd:string",
+      "@comment": "One of: INGEST, PROMOTION, CULL"
+    },
+    "timestamp": {
+      "@id": "disco:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "responseFormat": {
+      "@id": "disco:responseFormat",
+      "@type": "xsd:string",
+      "@comment": "One of: json, csv"
+    },
+    "reviewDatabaseSizeGB": {
+      "@id": "disco:reviewDatabaseSizeGB",
+      "@type": "xsd:decimal"
+    },
+    "tags": {
+      "@id": "schema:keywords",
+      "@container": "@set"
+    },
+    "contact": {
+      "@id": "schema:contactPoint",
+      "@type": "schema:ContactPoint"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:date"
+    },
+    "modified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:date"
+    }
+  },
+  "@graph": [
+    {
+      "@type": "DiscoAPI",
+      "@id": "https://api.csdisco.com",
+      "name": "DISCO API",
+      "description": "REST API for the DISCO eDiscovery platform providing access to datasets and metrics covering data-usage change events, review database sizes, and organizational data.",
+      "baseURL": "https://api.csdisco.com",
+      "humanURL": "https://developer.csdisco.com/",
+      "rateLimit": 100,
+      "rateLimitWindow": "per minute per customer organization",
+      "tags": ["eDiscovery", "Legal Technology", "AI", "Document Review", "Litigation"]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "disco:dataset-data-usage-changes",
+      "datasetId": "data-usage-changes",
+      "name": "Data Usage Changes",
+      "description": "Returns data usage change events including INGEST, PROMOTION, and CULL event types for tracking storage consumption over time."
+    },
+    {
+      "@type": "Metric",
+      "@id": "disco:metric-reviewdb-size",
+      "metricId": "metric-reviewdb-size",
+      "name": "Review Database Size",
+      "description": "Aggregated calculations of review database sizes in gigabytes for subscription cap management and anomaly detection."
+    }
+  ]
+}
