@@ -1,0 +1,37 @@
+name: DISCO API Rate Limits
+description: Rate limiting policies for the DISCO eDiscovery REST API.
+url: https://developer.csdisco.com/
+
+limits:
+  - scope: organization
+    requests-per-minute: 100
+    applies-to: all-endpoints
+    notes: >
+      The total of all API requests to all endpoints is limited to 100 requests
+      per minute per customer organization. This limit is shared across all API
+      keys and all endpoints within a single organization.
+
+authentication:
+  type: api-key
+  headers:
+    - name: disco-api-key
+      description: API key issued by DISCO to the customer.
+      required: true
+    - name: organization-id
+      description: The customer's DISCO organization identifier.
+      required: true
+  ip-allowlist:
+    enabled: true
+    type: cidr-block
+    notes: >
+      IPv4 CIDR block verification is required. Trusted IP sources are managed
+      via Settings in the DISCO platform.
+
+enforcement:
+  method: per-organization
+  notes: >
+    Rate limits apply at the organization level, not per API key. Customers
+    should design integrations to stay within the 100 req/min ceiling across
+    all concurrent callers.
+
+support: developers@csdisco.com

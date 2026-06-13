@@ -1,0 +1,54 @@
+name: DISCO FinOps and Cost Management
+description: Financial operations guidance for managing DISCO eDiscovery API and platform costs.
+url: https://csdisco.com/offerings/ediscovery/pricing
+
+cost-model:
+  type: per-gb-hosted
+  unit: gigabyte
+  scope: processed-data-in-active-review-and-eca
+  variable-factors:
+    - data-volume-ingested
+    - deduplication-applied
+    - hosting-duration
+
+cost-controls:
+  - name: Deduplication at Ingest
+    description: >
+      Enable global or family-level deduplication during ingestion to avoid
+      being charged for duplicate data. Reduces hosted GB and corresponding cost.
+    impact: reduces-billable-gb
+
+  - name: Data Usage API Monitoring
+    description: >
+      Use the DISCO API datasets and metrics endpoints to track data-usage change
+      events (INGEST, PROMOTION, CULL) and review database sizes over time.
+      Enables programmatic cost visibility and anomaly detection.
+    endpoints:
+      - POST /datasets/data-usage-changes
+      - POST /metrics/metric-reviewdb-size
+    use-cases:
+      - invoice-reconciliation
+      - anomaly-detection
+      - subscription-cap-management
+      - monthly-budget-tracking
+
+  - name: Subscription Cap Management
+    description: >
+      Monitor hosted GB against any contracted subscription cap to avoid
+      overage charges. Use the API to automate alerts when approaching limits.
+
+  - name: Culling Before Hosting
+    description: >
+      Apply filters, date ranges, and keyword searches during ECA to cull
+      irrelevant data before promoting to Active Review, minimizing hosted GB.
+
+api-finops:
+  rate-limit: 100 requests/minute/organization
+  cost: included-with-platform
+  key-contact: developers@csdisco.com
+  budget-alerts: available-via-api-monitoring
+
+contact:
+  sales: info@csdisco.com
+  phone: 833-653-4726
+  developers: developers@csdisco.com

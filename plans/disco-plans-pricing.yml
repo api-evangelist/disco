@@ -1,0 +1,37 @@
+name: DISCO Plans and Pricing
+description: Pricing and plan details for DISCO eDiscovery platform and API access.
+url: https://csdisco.com/offerings/ediscovery/pricing
+contact: info@csdisco.com
+phone: 833-653-4726
+
+model: per-gb
+summary: >
+  DISCO uses an all-inclusive, flat per-GB pricing model. There are no separate
+  fees for ingestion, processing, or user licenses. AI capabilities (Cecilia AI)
+  are included with no token limits. Customers contact DISCO for a tailored quote
+  rather than selecting a self-serve tier.
+
+plans:
+  - name: All-Inclusive Platform
+    type: enterprise
+    pricing: per-gb-hosted
+    quote-required: true
+    included:
+      - Ingestion and processing
+      - Early Case Assessment (ECA)
+      - Active Review hosting
+      - Production and export
+      - Unlimited user accounts
+      - Cecilia AI (Q&A, document summaries, deposition summaries, auto timelines)
+      - Deposition management
+      - Timeline creation and visualization
+      - Collaborative annotation
+      - API access (Datasets and Metrics endpoints)
+    notes: >
+      Deduplication is available at ingest; duplicate data is not charged at
+      global or family level when selected. No per-user license fees.
+
+api-access:
+  included-with-platform: true
+  contact: developers@csdisco.com
+  notes: API key issued by DISCO upon request; CIDR block registration required.
