@@ -1,0 +1,902 @@
+"""
+DISCO GraphQL Schema
+AI-powered legal technology platform for e-discovery and case management.
+Covers document review, AI-powered coding, search and analytics, production,
+custodian management, and case collaboration.
+"""
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum DocumentStatus {
+  PENDING
+  PROCESSING
+  REVIEWED
+  PRODUCED
+  EXCLUDED
+  ERROR
+}
+
+enum ReviewDecision {
+  RESPONSIVE
+  NON_RESPONSIVE
+  PRIVILEGED
+  NEEDS_REVIEW
+  UNDECIDED
+}
+
+enum PrivilegeType {
+  ATTORNEY_CLIENT
+  WORK_PRODUCT
+  COMMON_INTEREST
+  NOT_PRIVILEGED
+}
+
+enum ProductionFormat {
+  PDF
+  TIFF
+  NATIVE
+  TEXT
+  LOAD_FILE
+}
+
+enum CustodianStatus {
+  ACTIVE
+  INACTIVE
+  HOLD
+  RELEASED
+}
+
+enum TaskStatus {
+  QUEUED
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum SearchOperator {
+  AND
+  OR
+  NOT
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+enum AICodeStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum HoldStatus {
+  ACTIVE
+  RELEASED
+  EXPIRED
+}
+
+enum ExportFormat {
+  CSV
+  XLSX
+  JSON
+  XML
+}
+
+enum UserRole {
+  ADMIN
+  REVIEWER
+  CASE_MANAGER
+  READ_ONLY
+  BILLING_ADMIN
+}
+
+enum NotificationType {
+  TASK_COMPLETE
+  REVIEW_ASSIGNED
+  PRODUCTION_READY
+  HOLD_EXPIRING
+  SYSTEM_ALERT
+}
+
+enum DataSourceType {
+  EMAIL
+  FILE_SHARE
+  CLOUD_STORAGE
+  MOBILE
+  DATABASE
+  COLLABORATION
+}
+
+enum ProcessingStatus {
+  UPLOADING
+  EXTRACTING
+  INDEXING
+  DEDUPLICATING
+  COMPLETE
+  FAILED
+}
+
+# ─── Core Types ──────────────────────────────────────────────────────────────
+
+type Organization {
+  id: ID!
+  name: String!
+  domain: String
+  plan: SubscriptionPlan
+  cases: [Case!]!
+  users: [User!]!
+  storageUsedGB: Float!
+  storageLimitGB: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  fullName: String!
+  role: UserRole!
+  organization: Organization!
+  cases: [CaseMembership!]!
+  assignments: [ReviewAssignment!]!
+  isActive: Boolean!
+  lastLoginAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Case {
+  id: ID!
+  name: String!
+  description: String
+  matterNumber: String
+  organization: Organization!
+  members: [CaseMembership!]!
+  datasets: [Dataset!]!
+  reviewSets: [ReviewSet!]!
+  custodians: [Custodian!]!
+  holds: [LegalHold!]!
+  productions: [Production!]!
+  searches: [SavedSearch!]!
+  tags: [Tag!]!
+  storageUsedGB: Float!
+  documentCount: Int!
+  status: String!
+  createdBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CaseMembership {
+  id: ID!
+  case: Case!
+  user: User!
+  role: UserRole!
+  grantedBy: User!
+  grantedAt: DateTime!
+}
+
+type Dataset {
+  id: ID!
+  name: String!
+  case: Case!
+  custodian: Custodian
+  dataSource: DataSource
+  documents: [Document!]!
+  documentCount: Int!
+  sizeGB: Float!
+  processingStatus: ProcessingStatus!
+  processingProgress: Float
+  uploadedBy: User!
+  uploadedAt: DateTime!
+  processedAt: DateTime
+  metadata: JSON
+}
+
+type DataSource {
+  id: ID!
+  name: String!
+  type: DataSourceType!
+  configuration: JSON
+  datasets: [Dataset!]!
+  createdAt: DateTime!
+}
+
+type Document {
+  id: ID!
+  dataset: Dataset!
+  case: Case!
+  fileName: String!
+  fileType: String
+  fileSizeBytes: Int
+  custodian: Custodian
+  author: String
+  recipients: [String!]
+  subject: String
+  dateSent: DateTime
+  dateCreated: DateTime
+  dateModified: DateTime
+  content: String
+  extractedText: String
+  pageCount: Int
+  wordCount: Int
+  hash: String
+  isDuplicate: Boolean!
+  duplicateOf: Document
+  duplicates: [Document!]!
+  family: DocumentFamily
+  tags: [Tag!]!
+  reviewDecision: ReviewDecision
+  privilegeType: PrivilegeType
+  reviewedBy: User
+  reviewedAt: DateTime
+  aiCodes: [AICode!]!
+  annotations: [Annotation!]!
+  redactions: [Redaction!]!
+  productions: [ProductionDocument!]!
+  processingStatus: ProcessingStatus!
+  metadata: JSON
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type DocumentFamily {
+  id: ID!
+  parentDocument: Document!
+  childDocuments: [Document!]!
+  attachmentCount: Int!
+}
+
+type ReviewSet {
+  id: ID!
+  name: String!
+  description: String
+  case: Case!
+  documents: [Document!]!
+  documentCount: Int!
+  reviewedCount: Int!
+  responsiveCount: Int!
+  privilegedCount: Int!
+  assignments: [ReviewAssignment!]!
+  aiCodingJobs: [AICodingJob!]!
+  createdBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ReviewAssignment {
+  id: ID!
+  reviewSet: ReviewSet!
+  assignee: User!
+  documents: [Document!]!
+  documentCount: Int!
+  completedCount: Int!
+  dueDate: DateTime
+  assignedBy: User!
+  assignedAt: DateTime!
+  completedAt: DateTime
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  color: String
+  category: TagCategory
+  case: Case!
+  documentCount: Int!
+  isSystemTag: Boolean!
+  createdBy: User!
+  createdAt: DateTime!
+}
+
+type TagCategory {
+  id: ID!
+  name: String!
+  tags: [Tag!]!
+  case: Case!
+}
+
+type Custodian {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  fullName: String!
+  email: String
+  title: String
+  department: String
+  organization: String
+  case: Case!
+  status: CustodianStatus!
+  datasets: [Dataset!]!
+  documents: [Document!]!
+  holds: [LegalHold!]!
+  documentCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type LegalHold {
+  id: ID!
+  name: String!
+  description: String
+  case: Case!
+  custodians: [Custodian!]!
+  status: HoldStatus!
+  issuedDate: DateTime!
+  expirationDate: DateTime
+  reminderIntervalDays: Int
+  instructions: String
+  acknowledgments: [HoldAcknowledgment!]!
+  issuedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type HoldAcknowledgment {
+  id: ID!
+  hold: LegalHold!
+  custodian: Custodian!
+  acknowledgedAt: DateTime
+  remindersSent: Int!
+  lastReminderAt: DateTime
+}
+
+type Production {
+  id: ID!
+  name: String!
+  description: String
+  case: Case!
+  documents: [ProductionDocument!]!
+  documentCount: Int!
+  format: ProductionFormat!
+  status: TaskStatus!
+  batesPrefix: String
+  batesStart: Int
+  batesEnd: Int
+  outputSizeGB: Float
+  downloadUrl: String
+  requestedBy: User!
+  requestedAt: DateTime!
+  completedAt: DateTime
+}
+
+type ProductionDocument {
+  id: ID!
+  production: Production!
+  document: Document!
+  batesNumber: String
+  pageCount: Int
+  redacted: Boolean!
+  format: ProductionFormat!
+  outputPath: String
+}
+
+type SavedSearch {
+  id: ID!
+  name: String!
+  description: String
+  case: Case!
+  query: SearchQuery!
+  resultCount: Int
+  lastRunAt: DateTime
+  createdBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type SearchQuery {
+  id: ID!
+  terms: [SearchTerm!]!
+  operator: SearchOperator!
+  dateRange: DateRange
+  custodians: [Custodian!]
+  tags: [Tag!]
+  fileTypes: [String!]
+  reviewDecisions: [ReviewDecision!]
+}
+
+type SearchTerm {
+  id: ID!
+  value: String!
+  field: String
+  isPhrase: Boolean!
+  isFuzzy: Boolean!
+  boost: Float
+}
+
+type DateRange {
+  startDate: DateTime
+  endDate: DateTime
+  field: String!
+}
+
+type SearchResult {
+  totalCount: Int!
+  documents: [Document!]!
+  facets: SearchFacets!
+  pageInfo: PageInfo!
+}
+
+type SearchFacets {
+  custodians: [FacetBucket!]!
+  fileTypes: [FacetBucket!]!
+  tags: [FacetBucket!]!
+  dateHistogram: [DateHistogramBucket!]!
+  reviewDecisions: [FacetBucket!]!
+}
+
+type FacetBucket {
+  key: String!
+  count: Int!
+}
+
+type DateHistogramBucket {
+  date: DateTime!
+  count: Int!
+}
+
+type AICodingJob {
+  id: ID!
+  name: String!
+  reviewSet: ReviewSet!
+  model: AIModel!
+  codes: [AICode!]!
+  status: AICodeStatus!
+  accuracy: Float
+  totalDocuments: Int!
+  processedDocuments: Int!
+  createdBy: User!
+  createdAt: DateTime!
+  completedAt: DateTime
+}
+
+type AIModel {
+  id: ID!
+  name: String!
+  version: String!
+  description: String
+  capabilities: [String!]!
+  isActive: Boolean!
+}
+
+type AICode {
+  id: ID!
+  document: Document!
+  job: AICodingJob!
+  tag: Tag!
+  confidence: Float!
+  reasoning: String
+  isAccepted: Boolean
+  reviewedBy: User
+  reviewedAt: DateTime
+  createdAt: DateTime!
+}
+
+type Annotation {
+  id: ID!
+  document: Document!
+  content: String!
+  pageNumber: Int
+  coordinates: JSON
+  annotationType: String!
+  createdBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Redaction {
+  id: ID!
+  document: Document!
+  pageNumber: Int!
+  coordinates: JSON!
+  reason: String
+  redactionCode: String
+  appliedBy: User!
+  appliedAt: DateTime!
+}
+
+type SubscriptionPlan {
+  id: ID!
+  name: String!
+  storageLimitGB: Float!
+  userLimit: Int
+  features: [String!]!
+  pricePerMonth: Float
+  isActive: Boolean!
+}
+
+type UsageMetrics {
+  organization: Organization!
+  period: DateRange!
+  storageUsedGB: Float!
+  documentsProcessed: Int!
+  aiCodesGenerated: Int!
+  productionsCreated: Int!
+  activeUsers: Int!
+  reviewsCompleted: Int!
+  dataIngested: [DataIngestedMetric!]!
+}
+
+type DataIngestedMetric {
+  date: DateTime!
+  sizeGB: Float!
+  documentCount: Int!
+  custodian: Custodian
+}
+
+type Task {
+  id: ID!
+  type: String!
+  status: TaskStatus!
+  case: Case
+  progress: Float
+  message: String
+  error: String
+  startedAt: DateTime
+  completedAt: DateTime
+  createdAt: DateTime!
+}
+
+type Notification {
+  id: ID!
+  user: User!
+  type: NotificationType!
+  title: String!
+  message: String!
+  isRead: Boolean!
+  relatedCase: Case
+  relatedTask: Task
+  createdAt: DateTime!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int!
+}
+
+type AuditLog {
+  id: ID!
+  user: User!
+  action: String!
+  resourceType: String!
+  resourceId: ID!
+  details: JSON
+  ipAddress: String
+  userAgent: String
+  case: Case
+  timestamp: DateTime!
+}
+
+type AnalyticsReport {
+  id: ID!
+  name: String!
+  case: Case!
+  type: String!
+  parameters: JSON
+  results: JSON
+  generatedBy: User!
+  generatedAt: DateTime!
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+input CreateCaseInput {
+  name: String!
+  description: String
+  matterNumber: String
+}
+
+input UpdateCaseInput {
+  name: String
+  description: String
+  matterNumber: String
+}
+
+input CreateCustodianInput {
+  caseId: ID!
+  firstName: String!
+  lastName: String!
+  email: String
+  title: String
+  department: String
+  organization: String
+}
+
+input UpdateCustodianInput {
+  firstName: String
+  lastName: String
+  email: String
+  title: String
+  department: String
+  organization: String
+  status: CustodianStatus
+}
+
+input CreateLegalHoldInput {
+  caseId: ID!
+  name: String!
+  description: String
+  custodianIds: [ID!]!
+  issuedDate: DateTime!
+  expirationDate: DateTime
+  reminderIntervalDays: Int
+  instructions: String
+}
+
+input CreateReviewSetInput {
+  caseId: ID!
+  name: String!
+  description: String
+  documentIds: [ID!]
+  searchQueryId: ID
+}
+
+input ReviewDocumentInput {
+  documentId: ID!
+  decision: ReviewDecision!
+  privilegeType: PrivilegeType
+  tagIds: [ID!]
+  notes: String
+}
+
+input SearchInput {
+  caseId: ID!
+  terms: [SearchTermInput!]!
+  operator: SearchOperator
+  dateRange: DateRangeInput
+  custodianIds: [ID!]
+  tagIds: [ID!]
+  fileTypes: [String!]
+  reviewDecisions: [ReviewDecision!]
+  first: Int
+  after: String
+}
+
+input SearchTermInput {
+  value: String!
+  field: String
+  isPhrase: Boolean
+  isFuzzy: Boolean
+}
+
+input DateRangeInput {
+  startDate: DateTime
+  endDate: DateTime
+  field: String!
+}
+
+input CreateProductionInput {
+  caseId: ID!
+  name: String!
+  description: String
+  documentIds: [ID!]!
+  format: ProductionFormat!
+  batesPrefix: String
+  batesStart: Int
+  includeRedactions: Boolean
+}
+
+input CreateTagInput {
+  caseId: ID!
+  name: String!
+  color: String
+  categoryId: ID
+}
+
+input CreateTagCategoryInput {
+  caseId: ID!
+  name: String!
+}
+
+input CreateAICodingJobInput {
+  reviewSetId: ID!
+  name: String!
+  modelId: ID!
+  tagIds: [ID!]!
+}
+
+input SaveSearchInput {
+  caseId: ID!
+  name: String!
+  description: String
+  query: SearchInput!
+}
+
+input AddCaseMemberInput {
+  caseId: ID!
+  userId: ID!
+  role: UserRole!
+}
+
+input CreateAnnotationInput {
+  documentId: ID!
+  content: String!
+  pageNumber: Int
+  coordinates: JSON
+  annotationType: String!
+}
+
+input CreateRedactionInput {
+  documentId: ID!
+  pageNumber: Int!
+  coordinates: JSON!
+  reason: String
+  redactionCode: String
+}
+
+input PaginationInput {
+  first: Int
+  after: String
+  last: Int
+  before: String
+}
+
+input SortInput {
+  field: String!
+  direction: SortDirection!
+}
+
+# ─── Query Type ──────────────────────────────────────────────────────────────
+
+type Query {
+  # Organization
+  organization(id: ID!): Organization
+  myOrganization: Organization!
+
+  # Users
+  user(id: ID!): User
+  users(organizationId: ID!, pagination: PaginationInput): [User!]!
+  me: User!
+
+  # Cases
+  case(id: ID!): Case
+  cases(pagination: PaginationInput, sort: SortInput): [Case!]!
+
+  # Datasets
+  dataset(id: ID!): Dataset
+  datasets(caseId: ID!, pagination: PaginationInput): [Dataset!]!
+
+  # Documents
+  document(id: ID!): Document
+  documents(caseId: ID!, pagination: PaginationInput, sort: SortInput): [Document!]!
+  documentFamily(documentId: ID!): DocumentFamily
+
+  # Review Sets
+  reviewSet(id: ID!): ReviewSet
+  reviewSets(caseId: ID!, pagination: PaginationInput): [ReviewSet!]!
+
+  # Custodians
+  custodian(id: ID!): Custodian
+  custodians(caseId: ID!, pagination: PaginationInput): [Custodian!]!
+
+  # Legal Holds
+  legalHold(id: ID!): LegalHold
+  legalHolds(caseId: ID!, status: HoldStatus): [LegalHold!]!
+
+  # Productions
+  production(id: ID!): Production
+  productions(caseId: ID!, pagination: PaginationInput): [Production!]!
+
+  # Tags
+  tag(id: ID!): Tag
+  tags(caseId: ID!): [Tag!]!
+  tagCategories(caseId: ID!): [TagCategory!]!
+
+  # Search
+  search(input: SearchInput!): SearchResult!
+  savedSearch(id: ID!): SavedSearch
+  savedSearches(caseId: ID!): [SavedSearch!]!
+
+  # AI
+  aiCodingJob(id: ID!): AICodingJob
+  aiCodingJobs(reviewSetId: ID!): [AICodingJob!]!
+  aiModels: [AIModel!]!
+
+  # Analytics
+  usageMetrics(organizationId: ID!, period: DateRangeInput!): UsageMetrics!
+  analyticsReport(id: ID!): AnalyticsReport
+  analyticsReports(caseId: ID!): [AnalyticsReport!]!
+
+  # Tasks
+  task(id: ID!): Task
+  tasks(caseId: ID, status: TaskStatus): [Task!]!
+
+  # Notifications
+  notifications(isRead: Boolean, pagination: PaginationInput): [Notification!]!
+
+  # Audit
+  auditLogs(caseId: ID, userId: ID, pagination: PaginationInput): [AuditLog!]!
+
+  # Subscription
+  subscriptionPlans: [SubscriptionPlan!]!
+}
+
+# ─── Mutation Type ───────────────────────────────────────────────────────────
+
+type Mutation {
+  # Cases
+  createCase(input: CreateCaseInput!): Case!
+  updateCase(id: ID!, input: UpdateCaseInput!): Case!
+  deleteCase(id: ID!): Boolean!
+  addCaseMember(input: AddCaseMemberInput!): CaseMembership!
+  removeCaseMember(caseId: ID!, userId: ID!): Boolean!
+
+  # Custodians
+  createCustodian(input: CreateCustodianInput!): Custodian!
+  updateCustodian(id: ID!, input: UpdateCustodianInput!): Custodian!
+  deleteCustodian(id: ID!): Boolean!
+
+  # Legal Holds
+  createLegalHold(input: CreateLegalHoldInput!): LegalHold!
+  releaseHold(id: ID!): LegalHold!
+  sendHoldReminder(holdId: ID!, custodianIds: [ID!]!): Boolean!
+  acknowledgeHold(holdId: ID!): HoldAcknowledgment!
+
+  # Review Sets
+  createReviewSet(input: CreateReviewSetInput!): ReviewSet!
+  deleteReviewSet(id: ID!): Boolean!
+  assignDocuments(reviewSetId: ID!, userId: ID!, documentIds: [ID!]!): ReviewAssignment!
+
+  # Document Review
+  reviewDocument(input: ReviewDocumentInput!): Document!
+  bulkReviewDocuments(inputs: [ReviewDocumentInput!]!): [Document!]!
+  addTagToDocument(documentId: ID!, tagId: ID!): Document!
+  removeTagFromDocument(documentId: ID!, tagId: ID!): Document!
+
+  # Tags
+  createTag(input: CreateTagInput!): Tag!
+  updateTag(id: ID!, name: String, color: String): Tag!
+  deleteTag(id: ID!): Boolean!
+  createTagCategory(input: CreateTagCategoryInput!): TagCategory!
+
+  # Productions
+  createProduction(input: CreateProductionInput!): Production!
+  cancelProduction(id: ID!): Production!
+
+  # Search
+  saveSearch(input: SaveSearchInput!): SavedSearch!
+  deleteSearch(id: ID!): Boolean!
+  runSavedSearch(id: ID!): SearchResult!
+
+  # AI Coding
+  createAICodingJob(input: CreateAICodingJobInput!): AICodingJob!
+  cancelAICodingJob(id: ID!): AICodingJob!
+  acceptAICode(id: ID!): AICode!
+  rejectAICode(id: ID!): AICode!
+
+  # Annotations
+  createAnnotation(input: CreateAnnotationInput!): Annotation!
+  updateAnnotation(id: ID!, content: String!): Annotation!
+  deleteAnnotation(id: ID!): Boolean!
+
+  # Redactions
+  createRedaction(input: CreateRedactionInput!): Redaction!
+  deleteRedaction(id: ID!): Boolean!
+
+  # Notifications
+  markNotificationRead(id: ID!): Notification!
+  markAllNotificationsRead: Boolean!
+}
+
+# ─── Subscription Type ───────────────────────────────────────────────────────
+
+type Subscription {
+  taskUpdated(taskId: ID!): Task!
+  documentReviewed(reviewSetId: ID!): Document!
+  aiCodingJobUpdated(jobId: ID!): AICodingJob!
+  productionStatusChanged(productionId: ID!): Production!
+  notificationReceived(userId: ID!): Notification!
+  holdAcknowledged(holdId: ID!): HoldAcknowledgment!
+}

@@ -1,11 +1,12 @@
 aid: disco
 name: DISCO
-description: >
-  DISCO is an AI-powered eDiscovery platform providing a REST API for uploading
-  documents, managing review sets, running AI-assisted review, tagging documents,
-  and exporting productions. The API enables programmatic access to data-usage
-  change events, review database metrics, and organizational data for invoice
-  reconciliation, anomaly detection, and subscription management.
+description: 'DISCO is an AI-powered eDiscovery platform providing a REST API for
+  uploading documents, managing review sets, running AI-assisted review, tagging documents,
+  and exporting productions. The API enables programmatic access to data-usage change
+  events, review database metrics, and organizational data for invoice reconciliation,
+  anomaly detection, and subscription management.
+
+  '
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/apis.yml
 created: '2026-06-13'
@@ -13,60 +14,63 @@ modified: '2026-06-13'
 specificationVersion: '0.19'
 type: Index
 tags:
+- eDiscovery
+- Legal Technology
+- AI
+- Document Review
+- Litigation
+- Legal
+apis:
+- aid: disco:disco-api
+  name: DISCO API
+  description: 'REST API for the DISCO eDiscovery platform providing access to datasets
+    and metrics covering data-usage change events, review database sizes, and organizational
+    data. Used for invoice reconciliation, anomaly detection, and subscription cap
+    management.
+
+    '
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.csdisco.com/
+  baseURL: https://api.csdisco.com
+  tags:
   - eDiscovery
   - Legal Technology
-  - AI
-  - Document Review
-  - Litigation
-  - Legal
-apis:
-  - aid: disco:disco-api
-    name: DISCO API
-    description: >
-      REST API for the DISCO eDiscovery platform providing access to datasets
-      and metrics covering data-usage change events, review database sizes, and
-      organizational data. Used for invoice reconciliation, anomaly detection,
-      and subscription cap management.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.csdisco.com/
-    baseURL: https://api.csdisco.com
-    tags:
-      - eDiscovery
-      - Legal Technology
-      - Datasets
-      - Metrics
-      - Data Usage
-    properties:
-      - type: Documentation
-        url: https://developer.csdisco.com/
-      - type: Support
-        url: https://support.csdisco.com/hc/en-us/articles/16695422232333-DISCO-API
-      - type: OpenAPI
-        url: https://developer.csdisco.com/
-    contact:
-      - FN: DISCO Developer Support
-        email: developers@csdisco.com
-common:
-  - type: Plans
-    url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/plans/disco-plans-pricing.yml
-  - type: RateLimits
-    url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/rate-limits/disco-rate-limits.yml
-  - type: FinOps
-    url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/finops/disco-finops.yml
-  - type: Website
-    url: https://csdisco.com/
+  - Datasets
+  - Metrics
+  - Data Usage
+  properties:
   - type: Documentation
     url: https://developer.csdisco.com/
-  - type: Pricing
-    url: https://csdisco.com/offerings/ediscovery/pricing
-  - type: Blog
-    url: https://csdisco.com/blog
-  - type: Status
-    url: https://csdisco.statuspage.io/
   - type: Support
-    url: https://support.csdisco.com/
-  - type: ChangeLog
-    url: https://support.csdisco.com/hc/en-us/categories/changelog
+    url: https://support.csdisco.com/hc/en-us/articles/16695422232333-DISCO-API
+  - type: OpenAPI
+    url: https://developer.csdisco.com/
+  - url: graphql/disco-graphql.md
+    type: GraphQL
+  contact:
+  - FN: DISCO Developer Support
+    email: developers@csdisco.com
+common:
+- type: Plans
+  url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/plans/disco-plans-pricing.yml
+- type: RateLimits
+  url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/rate-limits/disco-rate-limits.yml
+- type: FinOps
+  url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/finops/disco-finops.yml
+- type: Website
+  url: https://csdisco.com/
+- type: Documentation
+  url: https://developer.csdisco.com/
+- type: Pricing
+  url: https://csdisco.com/offerings/ediscovery/pricing
+- type: Blog
+  url: https://csdisco.com/blog
+- type: Status
+  url: https://csdisco.statuspage.io/
+- type: Support
+  url: https://support.csdisco.com/
+- type: ChangeLog
+  url: https://support.csdisco.com/hc/en-us/categories/changelog
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
