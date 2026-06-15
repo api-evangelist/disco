@@ -1,7 +1,7 @@
 {
   "aid": "disco",
   "url": "https://csdisco.com/blog",
-  "fetched": "2026-06-13",
+  "fetched": "2026-06-14T20:42:17Z",
   "posts": [
     {
       "title": "12 Key Design Patent Cases & Their Impact",
@@ -40,7 +40,7 @@
       "summary": "Explores how modern legal technology might have affected the outcome of a historic case."
     },
     {
-      "title": "When \"Good\" Isn't Enough – Why Litigators Need a Purpose-Built Platform",
+      "title": "When \"Good\" Isn't Enough \u2013 Why Litigators Need a Purpose-Built Platform",
       "url": "https://csdisco.com/blog/when-good-isnt-enough-why-litigators-need-a-purpose-built-platform",
       "date": "2026-05-12",
       "summary": "Discusses purpose-built platforms that unite factual and legal analysis for strategic advantage."
@@ -57,5 +57,16 @@
       "date": "2026-04-16",
       "summary": "Addresses discovery challenges in cloud-based platforms like Slack, Microsoft 365, and Salesforce."
     }
-  ]
+  ],
+  "repo": "disco",
+  "feeds": [
+    {
+      "source": "https://csdisco.com/offerings/ediscovery/pricing",
+      "feed_url": "https://csdisco.com/offerings/ediscovery/pricing",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0
 }
