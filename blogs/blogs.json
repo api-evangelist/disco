@@ -1,7 +1,7 @@
 {
   "aid": "disco",
   "url": "https://csdisco.com/blog",
-  "fetched": "2026-06-14T20:42:17Z",
+  "fetched": "2026-06-27T12:03:07Z",
   "posts": [
     {
       "title": "12 Key Design Patent Cases & Their Impact",
@@ -61,6 +61,13 @@
   "repo": "disco",
   "feeds": [
     {
+      "source": "https://csdisco.com/blog",
+      "feed_url": "https://csdisco.com/blog/rss.xml",
+      "title": "",
+      "saved": 2,
+      "method": "discovered"
+    },
+    {
       "source": "https://csdisco.com/offerings/ediscovery/pricing",
       "feed_url": "https://csdisco.com/offerings/ediscovery/pricing",
       "title": "",
@@ -68,5 +75,5 @@
       "method": "none"
     }
   ],
-  "post_count": 0
+  "post_count": 5
 }
