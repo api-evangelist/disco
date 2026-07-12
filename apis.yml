@@ -51,6 +51,10 @@ apis:
   - FN: DISCO Developer Support
     email: developers@csdisco.com
 common:
+- type: TrustCenter
+  url: security/disco-trust-center.yml
+- type: DomainSecurity
+  url: security/disco-domain-security.yml
 - type: Plans
   url: https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/plans/disco-plans-pricing.yml
 - type: RateLimits
