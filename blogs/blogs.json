@@ -1,8 +1,20 @@
 {
   "aid": "disco",
   "url": "https://csdisco.com/blog",
-  "fetched": "2026-06-27T12:03:07Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "posts": [
+    {
+      "title": "12 Landmark Patent Infringement Cases & Analysis",
+      "url": "https://csdisco.com/blog/landmark-patent-infringement-cases-analysis",
+      "date": "2026-07-02",
+      "summary": "Analysis of 12 key patent infringement cases governing enforcement, damages, and available remedies."
+    },
+    {
+      "title": "15 Deposition Management Tips and Best Practices | DISCO",
+      "url": "https://csdisco.com/blog/deposition-management-best-practices",
+      "date": "2026-07-02",
+      "summary": "Deposition best practices for every stage of the process, from pre-deposition planning to post-deposition strategy."
+    },
     {
       "title": "12 Key Design Patent Cases & Their Impact",
       "url": "https://csdisco.com/blog/key-design-patent-cases-intellectual-property",
@@ -61,11 +73,11 @@
   "repo": "disco",
   "feeds": [
     {
-      "source": "https://csdisco.com/blog",
+      "source": "https://csdisco.com/blog/rss.xml",
       "feed_url": "https://csdisco.com/blog/rss.xml",
       "title": "",
-      "saved": 2,
-      "method": "discovered"
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://csdisco.com/offerings/ediscovery/pricing",
@@ -75,5 +87,5 @@
       "method": "none"
     }
   ],
-  "post_count": 5
+  "post_count": 54
 }
