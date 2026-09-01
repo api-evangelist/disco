@@ -52,7 +52,7 @@
       "summary": "Explores how modern legal technology might have affected the outcome of a historic case."
     },
     {
-      "title": "When \"Good\" Isn't Enough \u2013 Why Litigators Need a Purpose-Built Platform",
+      "title": "When \"Good\" Isn't Enough – Why Litigators Need a Purpose-Built Platform",
       "url": "https://csdisco.com/blog/when-good-isnt-enough-why-litigators-need-a-purpose-built-platform",
       "date": "2026-05-12",
       "summary": "Discusses purpose-built platforms that unite factual and legal analysis for strategic advantage."
@@ -77,7 +77,9 @@
       "feed_url": "https://csdisco.com/blog/rss.xml",
       "title": "",
       "saved": 0,
-      "method": "feed"
+      "method": "feed",
+      "nature": "vendor-blog",
+      "nature_basis": "path_blog"
     },
     {
       "source": "https://csdisco.com/offerings/ediscovery/pricing",
@@ -87,5 +89,8 @@
       "method": "none"
     }
   ],
-  "post_count": 111
+  "post_count": 111,
+  "feed_nature": "vendor-blog",
+  "feed_nature_basis": "path_blog",
+  "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
 }
