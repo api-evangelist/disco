@@ -1,7 +1,7 @@
 {
   "aid": "disco",
   "url": "https://csdisco.com/blog",
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "posts": [
     {
       "title": "12 Landmark Patent Infringement Cases & Analysis",
@@ -52,7 +52,7 @@
       "summary": "Explores how modern legal technology might have affected the outcome of a historic case."
     },
     {
-      "title": "When \"Good\" Isn't Enough – Why Litigators Need a Purpose-Built Platform",
+      "title": "When \"Good\" Isn't Enough \u2013 Why Litigators Need a Purpose-Built Platform",
       "url": "https://csdisco.com/blog/when-good-isnt-enough-why-litigators-need-a-purpose-built-platform",
       "date": "2026-05-12",
       "summary": "Discusses purpose-built platforms that unite factual and legal analysis for strategic advantage."
@@ -73,23 +73,21 @@
   "repo": "disco",
   "feeds": [
     {
-      "source": "https://csdisco.com/blog/rss.xml",
-      "feed_url": "https://csdisco.com/blog/rss.xml",
-      "title": "",
-      "saved": 0,
-      "method": "feed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
-    },
-    {
       "source": "https://csdisco.com/offerings/ediscovery/pricing",
       "feed_url": "https://csdisco.com/offerings/ediscovery/pricing",
       "title": "",
       "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://csdisco.com/blog/rss.xml",
+      "feed_url": "https://csdisco.com/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "post_count": 111,
+  "post_count": 112,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
   "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
