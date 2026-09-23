@@ -1,0 +1,29 @@
+# Front Door AI Index — disco — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: disco
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: csdisco.com
+  final_host: csdisco.com
+  ownership: own
+  owner: disco
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 34
+  host_score: 34
+  density: 17.15
+  words: 1982
+  tiers:
+    agentic: 1
+    core: 33
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 27
+    generative ai: 4
+    gen ai: 2
+    intelligence: 2
+    agentic: 1
