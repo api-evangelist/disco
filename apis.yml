@@ -75,8 +75,6 @@ apis:
     url: https://support.csdisco.com/hc/en-us/articles/16695422232333-DISCO-API
   - type: OpenAPI
     url: https://developer.csdisco.com/
-  - url: graphql/disco-graphql.md
-    type: GraphQL
   contact:
   - FN: DISCO Developer Support
     email: developers@csdisco.com
