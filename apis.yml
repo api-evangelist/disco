@@ -36,9 +36,13 @@ created: '2026-06-13'
 modified: '2026-06-13'
 specificationVersion: '0.23'
 type: Index
+x-docs-platform: redocly
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-25
+x-docs-hosting: aws-cloudfront
 tags:
 - eDiscovery
-- Legal Technology
+- Legal Tech
 - Artificial Intelligence
 - Document Review
 - Litigation
@@ -63,6 +67,12 @@ apis:
   humanURL: https://developer.csdisco.com/
   baseURL: https://api.csdisco.com
   tags:
+  - eDiscovery
+  - Legal Tech
+  - Datasets
+  - Metrics
+  - Data Usage
+  tags_raw:
   - eDiscovery
   - Legal Technology
   - Datasets
