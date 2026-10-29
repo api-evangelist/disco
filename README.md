@@ -1,4 +1,4 @@
-# DISCO (disco)
+# DISCO
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,64 +66,117 @@
 
 DISCO is an AI-powered eDiscovery platform providing a REST API for uploading documents, managing review sets, running AI-assisted review, tagging documents, and exporting productions. The API enables programmatic access to data-usage change events, review database metrics, and organizational data for invoice reconciliation, anomaly detection, and subscription management.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/apis.yml)
+**Areas:** eDiscovery · Legal Tech · Artificial Intelligence · Document Review · Litigation · Legal
 
-## Scope
+## DISCO on APIs.io
 
-- **Type:** Index
+Everything profiled for DISCO is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/disco/](https://apis.io/providers/disco/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (1)
 
-- eDiscovery
-- Legal Technology
-- AI
-- Document Review
-- Litigation
-- Legal
+- [DISCO API](https://apis.io/apis/disco/disco-api/) — REST API for the DISCO eDiscovery platform providing access to datasets and metrics covering data-usage change events, review database sizes, and…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### DISCO API
+GraphQL schemas.
 
-REST API for the DISCO eDiscovery platform providing access to datasets and metrics covering data-usage change events, review database sizes, and organizational data. Used for invoice reconciliation, anomaly detection, and subscription cap management.
+- [Moved to /providers/disco/](https://apis.io/graphqls/disco/disco-graphql/)
 
-- **Human URL:** [https://developer.csdisco.com/](https://developer.csdisco.com/)
-- **Base URL:** `https://api.csdisco.com`
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- eDiscovery
-- Legal Technology
-- Datasets
-- Metrics
-- Data Usage
+- [Disco Context](https://apis.io/jsonld/disco/disco-context/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://developer.csdisco.com/)
-- [Support](https://support.csdisco.com/hc/en-us/articles/16695422232333-DISCO-API)
-- [OpenAPI](https://developer.csdisco.com/) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Graph Q L](graphql/disco-graphql.md)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Disco Domain Security](https://apis.io/security/disco/disco-domain-security/)
+- [Disco Trust Center](https://apis.io/security/disco/disco-trust-center/)
 
-- [Plans](https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/plans/disco-plans-pricing.yml)
-- [Rate Limits](https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/rate-limits/disco-rate-limits.yml)
-- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/disco/refs/heads/main/finops/disco-finops.yml)
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Disco Plans Pricing](https://apis.io/plans/disco/disco-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Disco Rate Limits](https://apis.io/rate-limits/disco/disco-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Disco Finops](https://apis.io/finops/disco/disco-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://csdisco.com/)
 - [Documentation](https://developer.csdisco.com/)
 - [Pricing](https://csdisco.com/offerings/ediscovery/pricing)
-- [Blog](https://csdisco.com/blog)
-- [Status](https://csdisco.statuspage.io/)
 - [Support](https://support.csdisco.com/)
 - [Changelog](https://support.csdisco.com/hc/en-us/categories/changelog)
+- [Blog](https://csdisco.com/blog)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 38.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 16.7 |
+| Access clarity | 39.5 |
+
+**Agent readiness 15.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 14.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/disco/](https://apis.io/providers/disco/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for DISCO: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/disco/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
